@@ -1,8 +1,11 @@
 package controllers
 
 import (
+	"log"
+
 	"github.com/adibSetiawann/transaction-api-go/model"
 	"github.com/adibSetiawann/transaction-api-go/model/dto"
+	"github.com/adibSetiawann/transaction-api-go/utils"
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
 )
@@ -29,10 +32,17 @@ func Login(c *fiber.Ctx) error {
 	err := model.DB.First(&customer, "email = ?", loginForm.Email).Error
 	if err != nil {
 		return c.Status(404).JSON(fiber.Map{
-			"error": "customer not found",
+			"error": "wrong email",
 		})
 	}
 
+	isValid := utils.ConfirmPassword(loginForm.Password, customer.Password)
+
+	if !isValid {
+		return c.Status(404).JSON(fiber.Map{
+			"error": "wrong password",
+		})
+	}
 	return c.JSON(fiber.Map{
 		"token": "secret",
 	})
@@ -74,7 +84,15 @@ func RegisterCustomer(c *fiber.Ctx) error {
 		Phone:    customer.Phone,
 		GenderID: customer.GenderID,
 	}
+	hashedPassword, err := utils.HashPassword(customer.Password)
+	if err != nil {
+		log.Println(err)
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"message": "internal server error",
+		})
+	}
 
+	newCustomer.Password = hashedPassword
 	if customer.Name == "" {
 		return c.Status(400).JSON(fiber.Map{
 			"error": "field name is required",
@@ -85,7 +103,7 @@ func RegisterCustomer(c *fiber.Ctx) error {
 
 	return c.JSON(fiber.Map{
 		"message": "create customer success",
-		"data":    customer,
+		"data":    newCustomer,
 	})
 }
 

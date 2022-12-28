@@ -1,9 +1,10 @@
 package dto
 
+
 type CreateCustomerDto struct {
 	Name     string `json:"name" validate:"required"`
 	Email    string `json:"email" validate:"required"`
-	Password string `json:"password" validate:"required"`
+	Password string `json:"password" validate:"required,min=8"`
 	Address  string `json:"address"`
 	Phone    string `json:"phone"`
 	GenderID int    `json:"gender_id" form:"gender_id" validate:"required"`
