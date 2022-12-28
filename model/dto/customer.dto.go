@@ -1,11 +1,12 @@
 package dto
 
 type CreateCustomerDto struct {
-	Name     string `json:"name" binding:"required"`
-	Email    string `json:"email" binding:"required"`
+	Name     string `json:"name" validate:"required"`
+	Email    string `json:"email" validate:"required"`
+	Password string `json:"password" validate:"required"`
 	Address  string `json:"address"`
 	Phone    string `json:"phone"`
-	GenderID int    `json:"gender_id" form:"gender_id" binding:"required"`
+	GenderID int    `json:"gender_id" form:"gender_id" validate:"required"`
 }
 
 type UpdateCustomerDto struct {

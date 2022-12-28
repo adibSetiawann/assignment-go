@@ -3,6 +3,7 @@ package controllers
 import (
 	"github.com/adibSetiawann/transaction-api-go/model"
 	"github.com/adibSetiawann/transaction-api-go/model/dto"
+	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -29,12 +30,16 @@ func RegisterProduct(c *fiber.Ctx) error {
 		Name:        product.Name,
 		Description: product.Description,
 		MerchantId:  product.MerchantId,
+		Price:       product.Price,
 		Stock:       product.Stock,
 	}
 
-	if product.Name == "" {
+	validate := validator.New()
+	errValidate := validate.Struct(product)
+	if errValidate != nil {
 		return c.Status(400).JSON(fiber.Map{
-			"error": "field name is required",
+			"message": "failed",
+			"error":   errValidate.Error(),
 		})
 	}
 
