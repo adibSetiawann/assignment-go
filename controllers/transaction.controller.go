@@ -30,12 +30,11 @@ func String(length int) string {
 }
 
 func GenerateInvoice() string {
-	rndmString := strings.ToUpper(String(14))
-	year, month, day := time.Now().Date()
+	rndmString := strings.ToUpper(String(10))
+	_, month, day := time.Now().Date()
 
 	var str strings.Builder
 	str.WriteString("TRSC-")
-	str.WriteString(strconv.Itoa(int(year)))
 	str.WriteString(strconv.Itoa(int(month)))
 	str.WriteString(strconv.Itoa(day))
 	str.WriteString(rndmString)
