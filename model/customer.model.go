@@ -10,7 +10,7 @@ type Customer struct {
 	ID          int            `gorm:"primaryKey" form:"id" json:"id"`
 	Name        string         `json:"name" validate:"required"`
 	Email       string         `json:"email" validate:"required"`
-	Password    string         `json:"password"`
+	Password    string         `json:"-" gorm:"column:password"`
 	Phone       string         `json:"phone"`
 	Address     string         `json:"address"`
 	GenderID    int            `json:"gender_id" form:"gender_id" validate:"required"`
@@ -24,7 +24,6 @@ type CustomerResponse struct {
 	ID       int    `gorm:"primaryKey" form:"id" json:"id"`
 	Name     string `json:"name" validate:"required"`
 	Email    string `json:"email" validate:"required"`
-	Password string `json:"password"`
 	Phone    string `json:"phone"`
 	Address  string `json:"address"`
 	GenderID int    `json:"gender_id" form:"gender_id" validate:"required"`
