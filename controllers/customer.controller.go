@@ -2,12 +2,14 @@ package controllers
 
 import (
 	"log"
+	"time"
 
 	"github.com/adibSetiawann/transaction-api-go/model"
 	"github.com/adibSetiawann/transaction-api-go/model/dto"
 	"github.com/adibSetiawann/transaction-api-go/utils"
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
+	"github.com/golang-jwt/jwt"
 )
 
 func Login(c *fiber.Ctx) error {
@@ -43,8 +45,28 @@ func Login(c *fiber.Ctx) error {
 			"error": "wrong password",
 		})
 	}
+
+	claims := jwt.MapClaims{}
+	claims["name"] = customer.Name
+	claims["email"] = customer.Email
+	claims["exp"] = time.Now().Add(time.Minute * 1500).Unix()
+	if customer.Name == "admin" {
+		claims["role"] = "admin"
+	} else {
+		claims["role"] = "customer"
+	}
+
+	token, errToken := utils.GenerateToken(&claims)
+
+	if errToken != nil {
+		log.Println(errToken)
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"message": "unauthenticated",
+		})
+	}
+
 	return c.JSON(fiber.Map{
-		"token": "secret",
+		"token": token,
 	})
 }
 
