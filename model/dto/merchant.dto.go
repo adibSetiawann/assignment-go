@@ -1,8 +1,8 @@
 package dto
 
 type CreateMerchantDto struct {
-	Name     string `json:"name" binding:"required"`
-	Email    string `json:"email" binding:"required"`
+	Name     string `json:"name" validate:"required"`
+	Email    string `json:"email" validate:"required"`
 	Address  string `json:"address"`
 	Phone    string `json:"phone"`
 }

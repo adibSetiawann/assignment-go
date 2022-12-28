@@ -8,6 +8,7 @@ import (
 
 	"github.com/adibSetiawann/transaction-api-go/model"
 	"github.com/adibSetiawann/transaction-api-go/model/dto"
+	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -58,6 +59,15 @@ func CreateTransaction(c *fiber.Ctx) error {
 	if err := c.BodyParser(transaction); err != nil {
 		return c.Status(503).JSON(fiber.Map{
 			"error": "can't handle request",
+		})
+	}
+
+	validate := validator.New()
+	errValidate := validate.Struct(transaction)
+	if errValidate != nil {
+		return c.Status(400).JSON(fiber.Map{
+			"message": "failed",
+			"error":   errValidate.Error(),
 		})
 	}
 

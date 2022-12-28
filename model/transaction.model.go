@@ -2,7 +2,7 @@ package model
 
 type Transaction struct {
 	ID         int64  `gorm:"primaryKey" json:"id"`
-	Invoice    string `json:"invoice" binding:"required"`
+	Invoice    string `json:"invoice" validate:"required"`
 	Qty        int64  `json:"qty"`
 	StatusId   int    `json:"status_id"`
 	Status     Status `json:"status"`
@@ -11,15 +11,15 @@ type Transaction struct {
 }
 
 type TransactionResponse struct {
-	ID         int64            `gorm:"primaryKey" json:"id"`
-	Invoice    string           `json:"invoice" binding:"required"`
-	Qty        int64            `json:"qty"`
-	StatusId   int              `json:"status_id"`
-	Status     Status           `json:"status"`
-	CustomerId int              `json:"customer_id"`
-	ProductId  int              `json:"product_id"`
-	Customer   CustomerResponse `json:"customer"`
-	Product    Product          `json:"product"`
+	ID         int64                    `gorm:"primaryKey" json:"id"`
+	Invoice    string                   `json:"invoice" validate:"required"`
+	Qty        int64                    `json:"qty"`
+	StatusId   int                      `json:"status_id"`
+	Status     Status                   `json:"status"`
+	CustomerId int                      `json:"customer_id"`
+	ProductId  int                      `json:"product_id"`
+	Customer   CustomerRelationResponse `json:"customer"`
+	Product    ProductRelationResponse  `json:"product"`
 }
 
 func (TransactionResponse) TableName() string {

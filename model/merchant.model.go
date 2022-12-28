@@ -2,9 +2,9 @@ package model
 
 type Merchant struct {
 	ID       int64     `gorm:"primaryKey" json:"id"`
-	Name     string    `json:"name" binding:"required"`
-	Address  string    `json:"address" binding:"required"`
-	Email    string    `json:"email" binding:"required"`
+	Name     string    `json:"name" validate:"required"`
+	Address  string    `json:"address" validate:"required"`
+	Email    string    `json:"email" validate:"required"`
 	Phone    string    `json:"phone"`
 	Products []Product `json:"products"`
 }
