@@ -1,0 +1,17 @@
+{
+  "data": [
+    {
+      "id": 4,
+      "name": "semen gresik",
+      "description": "mantapp",
+      "price": 0,
+      "stock": 24,
+      "merchant_id": 2,
+      "merchants": {
+        "id": 2,
+        "name": "berkah usaha"
+      },
+      "deleted_at": null
+    }
+  ]
+}

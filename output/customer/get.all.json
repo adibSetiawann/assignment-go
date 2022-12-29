@@ -1,0 +1,56 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "admin",
+      "email": "admin",
+      "phone": "00000000",
+      "address": "jakarta",
+      "gender_id": 1,
+      "genders": {
+        "id": 1,
+        "description": "Men"
+      },
+      "deleted_at": null
+    },
+    {
+      "id": 4,
+      "name": "yanti susanti",
+      "email": "yanti@gmail.com",
+      "phone": "081238912",
+      "address": "demak",
+      "gender_id": 1,
+      "genders": {
+        "id": 1,
+        "description": "Men"
+      },
+      "deleted_at": null
+    },
+    {
+      "id": 6,
+      "name": "adiba fatmawati",
+      "email": "adibafatma@gmail.com",
+      "phone": "08123891123123",
+      "address": "demak",
+      "gender_id": 2,
+      "genders": {
+        "id": 2,
+        "description": "Women"
+      },
+      "deleted_at": null
+    },
+    {
+      "id": 3,
+      "name": "update",
+      "email": "budi@gmail.com",
+      "phone": "123",
+      "address": "update",
+      "gender_id": 1,
+      "genders": {
+        "id": 1,
+        "description": "Men"
+      },
+      "deleted_at": null
+    }
+  ]
+}

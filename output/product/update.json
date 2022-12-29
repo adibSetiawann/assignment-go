@@ -1,0 +1,16 @@
+{
+  "data": {
+    "id": 1,
+    "name": "kecap bango update ",
+    "description": "rasa gurih",
+    "price": 11000,
+    "stock": 12,
+    "merchant_id": 1,
+    "merchants": {
+      "id": 1,
+      "name": "maju jaya"
+    },
+    "deleted_at": null
+  },
+  "message": "update data successfully"
+}

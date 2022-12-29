@@ -1,0 +1,11 @@
+{
+  "data": {
+    "id": 2,
+    "name": "berkah usaha",
+    "address": "london",
+    "email": "berkah@gmail.com",
+    "phone": "0811111",
+    "deleted_at": null
+  },
+  "message": "update data successfully"
+}

@@ -1,0 +1,4 @@
+{
+  "error": "Key: 'CreateCustomer.Phone' Error:Field validation for 'Phone' failed on the 'required' tag\nKey: 'CreateCustomer.GenderID' Error:Field validation for 'GenderID' failed on the 'required' tag"
+}
+

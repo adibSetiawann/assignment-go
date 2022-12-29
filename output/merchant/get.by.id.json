@@ -1,0 +1,12 @@
+{
+  "data": [
+    {
+      "id": 6,
+      "name": "perkasa hidup",
+      "address": "malang",
+      "email": "perkasa@gmail.com",
+      "phone": "08768213123",
+      "deleted_at": null
+    }
+  ]
+}

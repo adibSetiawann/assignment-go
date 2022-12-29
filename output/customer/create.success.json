@@ -1,0 +1,16 @@
+{
+  "data": {
+    "id": 7,
+    "name": "ahmad darmawan",
+    "email": "ahmad@gmail.com",
+    "phone": "081245678090",
+    "address": "demak",
+    "gender_id": 1,
+    "genders": {
+      "id": 0,
+      "description": ""
+    },
+    "deleted_at": null
+  },
+  "message": "create data successfully"
+}

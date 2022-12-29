@@ -1,0 +1,26 @@
+{
+  "data": {
+    "id": 7,
+    "invoice": "TRSC-1229OSWNAWGGJJ",
+    "status_id": 1,
+    "customer_id": 4,
+    "product_id": 1,
+    "qty": 1,
+    "product": {
+      "id": 0,
+      "name": "",
+      "description": "",
+      "price": 0
+    },
+    "status": {
+      "id": 0,
+      "description": ""
+    },
+    "customer": {
+      "id": 0,
+      "name": ""
+    },
+    "deleted_at": null
+  },
+  "message": "create data successfully"
+}
