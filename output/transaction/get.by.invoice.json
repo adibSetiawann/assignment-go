@@ -1,0 +1,27 @@
+{
+  "data": [
+    {
+      "id": 2,
+      "invoice": "TRSC-1228TOKCEYLBID",
+      "status_id": 1,
+      "customer_id": 3,
+      "product_id": 1,
+      "qty": 1,
+      "product": {
+        "id": 1,
+        "name": "kecap bango update ",
+        "description": "rasa gurih",
+        "price": 11000
+      },
+      "status": {
+        "id": 1,
+        "description": "PENDING"
+      },
+      "customer": {
+        "id": 3,
+        "name": "darmawan santoso"
+      },
+      "deleted_at": null
+    }
+  ]
+}

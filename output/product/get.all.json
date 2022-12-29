@@ -1,0 +1,121 @@
+{
+  "data": [
+    {
+      "id": 3,
+      "name": "martil",
+      "description": "ukuran kecil",
+      "price": 0,
+      "stock": 24,
+      "merchant_id": 2,
+      "merchants": {
+        "id": 2,
+        "name": "berkah usaha"
+      },
+      "deleted_at": null
+    },
+    {
+      "id": 4,
+      "name": "semen gresik",
+      "description": "mantapp",
+      "price": 0,
+      "stock": 24,
+      "merchant_id": 2,
+      "merchants": {
+        "id": 2,
+        "name": "berkah usaha"
+      },
+      "deleted_at": null
+    },
+    {
+      "id": 5,
+      "name": "semen gresik",
+      "description": "mantapp",
+      "price": 0,
+      "stock": 24,
+      "merchant_id": 2,
+      "merchants": {
+        "id": 2,
+        "name": "berkah usaha"
+      },
+      "deleted_at": null
+    },
+    {
+      "id": 6,
+      "name": "semen gresik",
+      "description": "mantapp",
+      "price": 0,
+      "stock": 24,
+      "merchant_id": 2,
+      "merchants": {
+        "id": 2,
+        "name": "berkah usaha"
+      },
+      "deleted_at": null
+    },
+    {
+      "id": 7,
+      "name": "semen gresik",
+      "description": "mantapp",
+      "price": 0,
+      "stock": 24,
+      "merchant_id": 2,
+      "merchants": {
+        "id": 2,
+        "name": "berkah usaha"
+      },
+      "deleted_at": null
+    },
+    {
+      "id": 8,
+      "name": "semen gresik",
+      "description": "mantapp",
+      "price": 12000,
+      "stock": 24,
+      "merchant_id": 2,
+      "merchants": {
+        "id": 2,
+        "name": "berkah usaha"
+      },
+      "deleted_at": null
+    },
+    {
+      "id": 9,
+      "name": "semen mantapp",
+      "description": "mantapp",
+      "price": 12000,
+      "stock": 24,
+      "merchant_id": 1,
+      "merchants": {
+        "id": 1,
+        "name": "maju jaya"
+      },
+      "deleted_at": null
+    },
+    {
+      "id": 1,
+      "name": "update product",
+      "description": "ini sudah update",
+      "price": 11000,
+      "stock": 12,
+      "merchant_id": 1,
+      "merchants": {
+        "id": 1,
+        "name": "maju jaya"
+      },
+      "deleted_at": null
+    },
+    {
+      "id": 10,
+      "name": "semen mantapp",
+      "description": "mantapp",
+      "price": 12000,
+      "stock": 24,
+      "merchant_id": 1,
+      "merchants": {
+        "id": 1,
+        "name": "maju jaya"
+      },
+      "deleted_at": null
+    }
+  ]
+}

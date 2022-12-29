@@ -1,0 +1,16 @@
+{
+  "data": {
+    "id": 3,
+    "name": "darmawan santoso",
+    "email": "budi@gmail.com",
+    "phone": "087123123",
+    "address": "amerika",
+    "gender_id": 1,
+    "genders": {
+      "id": 1,
+      "description": "Men"
+    },
+    "deleted_at": null
+  },
+  "message": "update data successfully"
+}

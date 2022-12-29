@@ -5,6 +5,25 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+func AuthForRegistered(ctx *fiber.Ctx) error {
+	token := ctx.Get("x-token")
+	if token == "" {
+		return ctx.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"message": "unauthenticated",
+		})
+	}
+
+	_, err := utils.VerifyToken(token)
+
+	if err != nil {
+		return ctx.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"message": "unauthenticated",
+		})
+	}
+
+	return ctx.Next()
+}
+
 func AuthAsAdmin(ctx *fiber.Ctx) error {
 	token := ctx.Get("x-token")
 	if token == "" {
@@ -27,9 +46,9 @@ func AuthAsAdmin(ctx *fiber.Ctx) error {
 			"message": "forbidden access for this token",
 		})
 	}
-	
+
 	ctx.Locals("role", claims["role"])
-	
+
 	return ctx.Next()
 }
 
@@ -55,8 +74,8 @@ func AuthAsCustomer(ctx *fiber.Ctx) error {
 			"message": "forbidden access for this token",
 		})
 	}
-	
+
 	ctx.Locals("role", claims["role"])
-	
+
 	return ctx.Next()
 }

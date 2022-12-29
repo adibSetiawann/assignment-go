@@ -1,0 +1,17 @@
+{
+  "data": [
+    {
+      "id": 6,
+      "name": "adiba fatmawati",
+      "email": "adibafatma@gmail.com",
+      "phone": "08123891123123",
+      "address": "demak",
+      "gender_id": 2,
+      "genders": {
+        "id": 2,
+        "description": "Women"
+      },
+      "deleted_at": null
+    }
+  ]
+}

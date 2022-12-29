@@ -1,0 +1,36 @@
+{
+  "data": [
+    {
+      "id": 4,
+      "name": "berkah hidup",
+      "address": "jakarta",
+      "email": "berkahhidup@gmail.com",
+      "phone": "08123123",
+      "deleted_at": null
+    },
+    {
+      "id": 6,
+      "name": "perkasa hidup",
+      "address": "malang",
+      "email": "perkasa@gmail.com",
+      "phone": "08768213123",
+      "deleted_at": null
+    },
+    {
+      "id": 1,
+      "name": "maju jaya",
+      "address": "london",
+      "email": "",
+      "phone": "0811111",
+      "deleted_at": null
+    },
+    {
+      "id": 2,
+      "name": "berkah usaha",
+      "address": "london",
+      "email": "berkah@gmail.com",
+      "phone": "0811111",
+      "deleted_at": null
+    }
+  ]
+}

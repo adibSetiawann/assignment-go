@@ -1,0 +1,16 @@
+{
+  "data": {
+    "id": 10,
+    "name": "semen mantapp",
+    "description": "mantapp",
+    "price": 12000,
+    "stock": 24,
+    "merchant_id": 1,
+    "merchants": {
+      "id": 0,
+      "name": ""
+    },
+    "deleted_at": null
+  },
+  "message": "create data successfully"
+}
