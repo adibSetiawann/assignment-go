@@ -12,10 +12,10 @@ func ProductRoute(app *fiber.App) {
 	productRepo := repository.NewProductRepository()
 	productService := service.NewProductService(&productRepo)
 	productController := controller.NewProductController(&productService)
+	
 	app.Get("/products", productController.GetAll)
 	app.Get("/products/:id", productController.GetById)
-	// app.Post("/products", middleware.AuthAsAdmin, productController.Create)
-	app.Post("/products",  productController.Create)
+	app.Post("/products", middleware.AuthAsAdmin, productController.Create)
 	app.Put("/products/update/:id", middleware.AuthAsAdmin, productController.Update)
-	app.Delete("/products/delete/:id",  productController.Remove)
+	app.Delete("/products/delete/:id", middleware.AuthAsAdmin, productController.Remove)
 }

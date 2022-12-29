@@ -1,8 +1,10 @@
 package controller
 
 import (
+	"log"
 	"strconv"
 
+	"github.com/adibSetiawann/transaction-api-go/config"
 	"github.com/adibSetiawann/transaction-api-go/model"
 	"github.com/adibSetiawann/transaction-api-go/service/customer"
 	"github.com/gofiber/fiber/v2"
@@ -40,14 +42,54 @@ func (mc *CustomerController) Login(c *fiber.Ctx) error {
 			"message": token,
 		})
 	}
-	
+
 	if token == "please input correct password" {
 		status = 404
 	} else {
 		status = 200
 	}
+
+	s, _ := config.Store.Get(c)
+
+	if s.Fresh() {
+		email := customerReq.Email
+
+		s.Set("Email", email)
+
+		err := s.Save()
+		if err != nil {
+			log.Println(err)
+		}
+
+	}
+
 	return c.Status(status).JSON(fiber.Map{
 		"token": token,
+	})
+}
+
+func (mc *CustomerController) Logout(c *fiber.Ctx) error {
+	req := new(model.LoginForm)
+
+	if err := c.BodyParser(&req); err != nil {
+		log.Println(err)
+	}
+
+	s, _ := config.Store.Get(c)
+
+	if len(req.Email) > 0 {
+
+		_, err := config.Store.Storage.Get(req.Email)
+		if err != nil {
+			log.Println(err)
+		}
+
+		config.Store.Storage.Delete(req.Email)
+		s.Destroy()
+	} 
+
+	return c.JSON(fiber.Map{
+		"message": "success",
 	})
 }
 
