@@ -1,0 +1,28 @@
+{
+  "data": [
+    {
+      "id": 8,
+      "invoice": "TRSC-1229QKBVWMFJLG",
+      "status_id": 3,
+      "customer_id": 4,
+      "product_id": 9,
+      "qty": 1000,
+      "grand_total": 0,
+      "product": {
+        "id": 9,
+        "name": "semen mantapp",
+        "description": "mantapp",
+        "price": 12000
+      },
+      "status": {
+        "id": 3,
+        "description": "CANCELED"
+      },
+      "customer": {
+        "id": 4,
+        "name": "yanti susanti"
+      },
+      "deleted_at": null
+    }
+  ]
+}

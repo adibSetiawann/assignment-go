@@ -110,3 +110,31 @@ func (mc *TransactionController) Remove(c *fiber.Ctx) error {
 		"message": "delete success",
 	})
 }
+
+func (mc *TransactionController) CancelPayment(c *fiber.Ctx) error {
+	invoice := c.Params("invoice")
+	err := mc.transactionService.CancelPayment(invoice)
+	if err != nil {
+		return c.Status(404).JSON(fiber.Map{
+			"message": "transaction not found in database",
+		})
+	}
+
+	return c.Status(200).JSON(fiber.Map{
+		"message": "transaction status canceled",
+	})
+}
+
+func (mc *TransactionController) SuccessPayment(c *fiber.Ctx) error {
+	invoice := c.Params("invoice")
+	err := mc.transactionService.SuccessPayment(invoice)
+	if err != nil {
+		return c.Status(404).JSON(fiber.Map{
+			"message": "transaction not found in database",
+		})
+	}
+
+	return c.Status(200).JSON(fiber.Map{
+		"message": "transaction status success",
+	})
+}

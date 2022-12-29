@@ -9,7 +9,7 @@ func AuthForRegistered(ctx *fiber.Ctx) error {
 	token := ctx.Get("x-token")
 	if token == "" {
 		return ctx.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
-			"message": "unauthenticated",
+			"message": "Unauthorized",
 		})
 	}
 
@@ -17,7 +17,7 @@ func AuthForRegistered(ctx *fiber.Ctx) error {
 
 	if err != nil {
 		return ctx.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
-			"message": "unauthenticated",
+			"message": "Unauthorized",
 		})
 	}
 
@@ -28,7 +28,7 @@ func AuthAsAdmin(ctx *fiber.Ctx) error {
 	token := ctx.Get("x-token")
 	if token == "" {
 		return ctx.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
-			"message": "unauthenticated",
+			"message": "Unauthorized",
 		})
 	}
 
@@ -36,7 +36,7 @@ func AuthAsAdmin(ctx *fiber.Ctx) error {
 
 	if err != nil {
 		return ctx.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
-			"message": "unauthenticated",
+			"message": "Unauthorized",
 		})
 	}
 
@@ -56,7 +56,7 @@ func AuthAsCustomer(ctx *fiber.Ctx) error {
 	token := ctx.Get("x-token")
 	if token == "" {
 		return ctx.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
-			"message": "unauthenticated",
+			"message": "Unauthorized",
 		})
 	}
 
@@ -64,7 +64,7 @@ func AuthAsCustomer(ctx *fiber.Ctx) error {
 
 	if err != nil {
 		return ctx.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
-			"message": "unauthenticated",
+			"message": "Unauthorized",
 		})
 	}
 

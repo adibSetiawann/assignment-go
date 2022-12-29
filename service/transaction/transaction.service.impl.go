@@ -11,11 +11,13 @@ import (
 	"github.com/adibSetiawann/transaction-api-go/entity"
 	"github.com/adibSetiawann/transaction-api-go/model"
 	repository "github.com/adibSetiawann/transaction-api-go/repository/transaction"
+	repo "github.com/adibSetiawann/transaction-api-go/repository/product"
 	"github.com/go-playground/validator/v10"
 )
 
 type TransactionServiceImpl struct {
 	transactionRepo repository.TransactionRepository
+	productRepo repo.ProductRepository
 }
 
 const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -48,9 +50,9 @@ func GenerateInvoice() string {
 	return str.String()
 }
 
-func (ps *TransactionServiceImpl) Create(request model.CreateTransaction) (model.TransactionResponse, error) {
+func (ts *TransactionServiceImpl) Create(request model.CreateTransaction) (model.TransactionResponse, error) {
 	var transactionResponse model.TransactionResponse
-
+	
 	transaction := entity.Transaction{
 		Invoice:    GenerateInvoice(),
 		StatusId:   1,
@@ -58,39 +60,64 @@ func (ps *TransactionServiceImpl) Create(request model.CreateTransaction) (model
 		ProductId:  request.ProductId,
 		Qty:        request.Qty,
 	}
-
-	errCreate := ps.transactionRepo.Create(&transaction)
+	
+	errCreate := ts.transactionRepo.Create(&transaction)
 	if errCreate != nil {
 		log.Println(errCreate.Error())
 		return transactionResponse, errCreate
 	}
+	
+	var productData model.ProductRelationResponse
+	productId := strconv.Itoa(request.ProductId)
+	
+	product,_ := ts.productRepo.FindById(productId)
 
+	productData.ID = product[0].ID
+	productData.Name =product[0].Name
+	productData.Description = product[0].Description
+	productData.Price = product[0].Price
+
+	transactionResponse.GrandTotal = product[0].Price * request.Qty
+	
 	transactionResponse.ID = transaction.ID
 	transactionResponse.Invoice = transaction.Invoice
 	transactionResponse.StatusId = transaction.StatusId
 	transactionResponse.CustomerId = transaction.CustomerId
 	transactionResponse.ProductId = transaction.ProductId
+	transactionResponse.Product = productData
 	transactionResponse.Qty = transaction.Qty
 	return transactionResponse, nil
 }
 
-func (ms *TransactionServiceImpl) Update(invoice string, request model.UpdateTransaction) (model.TransactionResponse, error) {
+func (ts *TransactionServiceImpl) Update(invoice string, request model.UpdateTransaction) (model.TransactionResponse, error) {
 	var transactionResponse model.TransactionResponse
 
-	errCreate := ms.transactionRepo.Update(invoice, &request)
+	errCreate := ts.transactionRepo.Update(invoice, &request)
 
 	if errCreate != nil {
 		log.Println(errCreate.Error())
 		return transactionResponse, errCreate
 	}
 
-	transactions, _ := ms.transactionRepo.FindByInvoice(invoice)
+	transactions, _ := ts.transactionRepo.FindByInvoice(invoice)
 
+	var productData model.ProductRelationResponse
+	productId := strconv.Itoa(request.ProductId)
+	
+	product,_ := ts.productRepo.FindById(productId)
+
+	productData.ID = product[0].ID
+	productData.Name =product[0].Name
+	productData.Description = product[0].Description
+	productData.Price = product[0].Price
+
+	transactionResponse.GrandTotal = product[0].Price * request.Qty
+	
 	transactionResponse.ID = transactions[0].ID
 	transactionResponse.Invoice = transactions[0].Invoice
 	transactionResponse.Qty = request.Qty
 	transactionResponse.ProductId = request.ProductId
-	transactionResponse.Product = transactions[0].Product
+	transactionResponse.Product = productData
 	transactionResponse.CustomerId = transactions[0].CustomerId
 	transactionResponse.Customer = transactions[0].Customer
 	transactionResponse.StatusId = transactions[0].StatusId
@@ -98,8 +125,8 @@ func (ms *TransactionServiceImpl) Update(invoice string, request model.UpdateTra
 	return transactionResponse, nil
 }
 
-func (ms *TransactionServiceImpl) Remove(invoice string) error {
-	errDelete := ms.transactionRepo.DeleteByInvoice(invoice)
+func (ts *TransactionServiceImpl) Remove(invoice string) error {
+	errDelete := ts.transactionRepo.DeleteByInvoice(invoice)
 	if errDelete != nil {
 		log.Println(errDelete.Error())
 		return errDelete
@@ -108,23 +135,43 @@ func (ms *TransactionServiceImpl) Remove(invoice string) error {
 	return nil
 }
 
-func (ms *TransactionServiceImpl) GetByInvoice(id string) ([]model.TransactionResponse, error) {
-	merchants, errFind := ms.transactionRepo.FindByInvoice(id)
+func (ts *TransactionServiceImpl) GetByInvoice(id string) ([]model.TransactionResponse, error) {
+	merchants, errFind := ts.transactionRepo.FindByInvoice(id)
 	if errFind != nil {
 		return nil, errFind
 	}
 	return merchants, nil
 }
 
-func (ps *TransactionServiceImpl) GetAllData() ([]model.TransactionResponse, error) {
-	transactions, errFind := ps.transactionRepo.FindAll()
+func (ts *TransactionServiceImpl) GetAllData() ([]model.TransactionResponse, error) {
+	transactions, errFind := ts.transactionRepo.FindAll()
 	if errFind != nil {
 		return nil, errFind
 	}
 	return transactions, nil
 }
 
-func (ms *TransactionServiceImpl) Validation(userRequest interface{}) error {
+func (ts *TransactionServiceImpl) CancelPayment(invoice string) error {
+	errorCancelPayment := ts.transactionRepo.CancelPayment(invoice)
+	if errorCancelPayment != nil {
+		log.Println(errorCancelPayment.Error())
+		return errorCancelPayment
+	}
+
+	return nil
+}
+
+func (ts *TransactionServiceImpl) SuccessPayment(invoice string) error {
+	errorCancelPayment := ts.transactionRepo.SuccessPayment(invoice)
+	if errorCancelPayment != nil {
+		log.Println(errorCancelPayment.Error())
+		return errorCancelPayment
+	}
+
+	return nil
+}
+
+func (ts *TransactionServiceImpl) Validation(userRequest interface{}) error {
 	var messageError string
 	var isError bool
 
@@ -143,8 +190,9 @@ func (ms *TransactionServiceImpl) Validation(userRequest interface{}) error {
 	return nil
 }
 
-func NewTransactionService(transactionRepo *repository.TransactionRepository) TransactionService {
+func NewTransactionService(transactionRepo *repository.TransactionRepository, productRepo *repo.ProductRepository) TransactionService {
 	return &TransactionServiceImpl{
 		transactionRepo: *transactionRepo,
+		productRepo: *productRepo,
 	}
 }
