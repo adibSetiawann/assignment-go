@@ -1,0 +1,28 @@
+{
+  "data": [
+    {
+      "id": 8,
+      "invoice": "TRSC-1229QKBVWMFJLG",
+      "status_id": 2,
+      "customer_id": 4,
+      "product_id": 11,
+      "qty": 5,
+      "grand_total": 0,
+      "product": {
+        "id": 11,
+        "name": "Masako",
+        "description": "bumbu masak",
+        "price": 11000
+      },
+      "status": {
+        "id": 2,
+        "description": "PAYED"
+      },
+      "customer": {
+        "id": 4,
+        "name": "yanti susanti"
+      },
+      "deleted_at": null
+    }
+  ]
+}

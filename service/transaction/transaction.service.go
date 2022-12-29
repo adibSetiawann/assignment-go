@@ -10,5 +10,7 @@ type TransactionService interface {
 	Remove(invoice string) error
 	GetAllData() ([]model.TransactionResponse, error)
 	GetByInvoice(invoice string) ([]model.TransactionResponse, error)
+	CancelPayment(invoice string) error
+	SuccessPayment(invoice string) error
 	Validation(transactionRequest interface{}) error
 }

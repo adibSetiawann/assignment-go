@@ -90,6 +90,42 @@ func (*TransactionRepositoryImplement) FindAll() ([]model.TransactionResponse, e
 	return transactions, nil
 }
 
+func (*TransactionRepositoryImplement) CancelPayment(invoice string) error {
+
+	var cancelTransaction entity.Transaction
+
+	err := config.DB.Debug().First(&cancelTransaction, "invoice=?", invoice)
+	if err.Error != nil {
+		return  err.Error
+	}
+
+	cancelTransaction.StatusId = 3
+
+	errUpdate := config.DB.Debug().Save(&cancelTransaction).Error
+	if errUpdate != nil {
+		return errUpdate
+	}
+	return nil
+}
+
+func (*TransactionRepositoryImplement) SuccessPayment(invoice string) error {
+
+	var cancelTransaction entity.Transaction
+
+	err := config.DB.Debug().First(&cancelTransaction, "invoice=?", invoice)
+	if err.Error != nil {
+		return  err.Error
+	}
+
+	cancelTransaction.StatusId = 2
+
+	errUpdate := config.DB.Debug().Save(&cancelTransaction).Error
+	if errUpdate != nil {
+		return errUpdate
+	}
+	return nil
+}
+
 func NewTransactionRepository() TransactionRepository {
 	return &TransactionRepositoryImplement{}
 }

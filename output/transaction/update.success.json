@@ -1,11 +1,12 @@
 {
   "data": {
-    "id": 2,
-    "invoice": "TRSC-1228TOKCEYLBID",
+    "id": 8,
+    "invoice": "TRSC-1229QKBVWMFJLG",
     "status_id": 1,
-    "customer_id": 3,
+    "customer_id": 4,
     "product_id": 9,
-    "qty": 1,
+    "qty": 2,
+    "grand_total": 24000,
     "product": {
       "id": 9,
       "name": "semen mantapp",
@@ -17,8 +18,8 @@
       "description": "PENDING"
     },
     "customer": {
-      "id": 3,
-      "name": "darmawan santoso"
+      "id": 4,
+      "name": "yanti susanti"
     },
     "deleted_at": null
   },

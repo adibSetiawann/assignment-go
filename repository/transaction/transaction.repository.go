@@ -11,4 +11,6 @@ type TransactionRepository interface {
 	FindAll() ([]model.TransactionResponse, error)
 	FindByInvoice(invoice string) ([]model.TransactionResponse, error)
 	DeleteByInvoice(invoice string) error
+	CancelPayment(invoice string) error
+	SuccessPayment(invoice string) error
 }

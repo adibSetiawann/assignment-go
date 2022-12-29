@@ -1,16 +1,17 @@
 {
   "data": {
-    "id": 7,
-    "invoice": "TRSC-1229OSWNAWGGJJ",
+    "id": 13,
+    "invoice": "TRSC-1229JNAXKPKNQI",
     "status_id": 1,
-    "customer_id": 4,
+    "customer_id": 1,
     "product_id": 1,
-    "qty": 1,
+    "qty": 4,
+    "grand_total": 44000,
     "product": {
-      "id": 0,
-      "name": "",
-      "description": "",
-      "price": 0
+      "id": 1,
+      "name": "kecap bango update ",
+      "description": "rasa gurih",
+      "price": 11000
     },
     "status": {
       "id": 0,
