@@ -6,7 +6,7 @@ import (
 )
 
 func AuthForRegistered(ctx *fiber.Ctx) error {
-	token := ctx.Get("x-token")
+	token := ctx.Cookies("jwt")
 	if token == "" {
 		return ctx.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 			"message": "Unauthorized",
@@ -25,7 +25,7 @@ func AuthForRegistered(ctx *fiber.Ctx) error {
 }
 
 func AuthAsAdmin(ctx *fiber.Ctx) error {
-	token := ctx.Get("x-token")
+	token := ctx.Cookies("jwt")
 	if token == "" {
 		return ctx.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 			"message": "Unauthorized",
@@ -53,7 +53,7 @@ func AuthAsAdmin(ctx *fiber.Ctx) error {
 }
 
 func AuthAsCustomer(ctx *fiber.Ctx) error {
-	token := ctx.Get("x-token")
+	token := ctx.Cookies("jwt")
 	if token == "" {
 		return ctx.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 			"message": "Unauthorized",

@@ -1,10 +1,9 @@
 package controller
 
 import (
-	"log"
 	"strconv"
+	"time"
 
-	"github.com/adibSetiawann/transaction-api-go/config"
 	"github.com/adibSetiawann/transaction-api-go/model"
 	"github.com/adibSetiawann/transaction-api-go/service/customer"
 	"github.com/gofiber/fiber/v2"
@@ -49,44 +48,28 @@ func (mc *CustomerController) Login(c *fiber.Ctx) error {
 		status = 200
 	}
 
-	s, _ := config.Store.Get(c)
-
-	if s.Fresh() {
-		email := customerReq.Email
-
-		s.Set("Email", email)
-
-		err := s.Save()
-		if err != nil {
-			log.Println(err)
-		}
-
+	cookie := fiber.Cookie{
+		Name:     "jwt",
+		Value:    token,
+		Expires:  time.Now().Add(time.Hour * 24),
+		HTTPOnly: true,
 	}
 
+	c.Cookie(&cookie)
+
 	return c.Status(status).JSON(fiber.Map{
-		"token": token,
+		"token": "success login",
 	})
 }
 
 func (mc *CustomerController) Logout(c *fiber.Ctx) error {
-	req := new(model.LoginForm)
-
-	if err := c.BodyParser(&req); err != nil {
-		log.Println(err)
+	cookie := fiber.Cookie{
+		Name:     "jwt",
+		Value:    "",
+		Expires:  time.Now().Add(-time.Hour),
+		HTTPOnly: true,
 	}
-
-	s, _ := config.Store.Get(c)
-
-	if len(req.Email) > 0 {
-
-		_, err := config.Store.Storage.Get(req.Email)
-		if err != nil {
-			log.Println(err)
-		}
-
-		config.Store.Storage.Delete(req.Email)
-		s.Destroy()
-	} 
+	c.Cookie(&cookie)
 
 	return c.JSON(fiber.Map{
 		"message": "success",
