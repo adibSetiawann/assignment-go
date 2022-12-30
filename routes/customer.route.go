@@ -13,9 +13,9 @@ func CustomerRoute(app *fiber.App) {
 	customerService := service.NewCustomerService(&customerRepo)
 	customerController := controller.NewCustomerController(&customerService)
 
-	app.Post("/customers", customerController.Create)
-	app.Post("customers/login", customerController.Login)
-	app.Post("customers/logout", middleware.AuthForRegistered, customerController.Logout)
+	app.Post("/register", customerController.Create)
+	app.Post("/login", customerController.Login)
+	app.Post("/logout", middleware.AuthForRegistered, customerController.Logout)
 	app.Get("/customers", middleware.AuthAsAdmin, customerController.GetAll)
 	app.Get("/customers/:id", middleware.AuthForRegistered, customerController.GetById)
 	app.Put("/customers/update/:id", middleware.AuthAsCustomer, customerController.Update)
